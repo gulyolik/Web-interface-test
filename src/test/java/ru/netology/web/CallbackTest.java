@@ -46,8 +46,10 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldCheckNameValidationV1(){
+    void shouldCheckNameValidationV1() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys(" ");
+        driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79967737496");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Поле обязательно для заполнения";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'name'] .input__sub")).getText().trim();
@@ -55,9 +57,10 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldCheckNameValidationV2(){
+    void shouldCheckNameValidationV2() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Vasiliy");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79967737496");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'name'] .input__sub")).getText().trim();
@@ -65,21 +68,43 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldCheckNameValidationV3(){
+    void shouldCheckNameValidationV3() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Маша");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79967737496");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Укажите точно как в паспорте";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'name'] .input__sub")).getText().trim();
         Assertions.assertEquals(expected, actual);
-
-
     }
 
     @Test
-    void shouldCheckPhoneNumberValidationV1(){
+    void shouldCheckNameValidationV4() {
+        driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Санёк");
+        driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79967737496");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.className("button")).click();
+        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
+        String actual = driver.findElement(By.cssSelector("[data-test-id= 'name'] .input__sub")).getText().trim();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldCheckNameValidationV5() {
+        driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Елена Марьина-Рощина");
+        driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79967737496");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.className("button")).click();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.cssSelector("[data-test-id= order-success]")).getText().trim();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldCheckPhoneNumberValidationV1() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Василий");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys(" ");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Поле обязательно для заполнения";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'phone'].input_invalid .input__sub")).getText().trim();
@@ -88,9 +113,10 @@ public class CallbackTest {
 
 
     @Test
-    void shouldCheckPhoneNumberValidationV2(){
+    void shouldCheckPhoneNumberValidationV2() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Василий");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+799677374966");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'phone'].input_invalid .input__sub")).getText().trim();
@@ -98,9 +124,10 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldCheckPhoneNumberValidationV3(){
+    void shouldCheckPhoneNumberValidationV3() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Василий");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("phone");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'phone'].input_invalid .input__sub")).getText().trim();
@@ -108,9 +135,10 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldCheckPhoneNumberValidationV4(){
+    void shouldCheckPhoneNumberValidationV4() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Василий");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("89967737496");
+        driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
         String actual = driver.findElement(By.cssSelector("[data-test-id= 'phone'].input_invalid .input__sub")).getText().trim();
@@ -119,7 +147,7 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldCheckCheckBox(){
+    void shouldCheckCheckBox() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Василий");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79967737496");
         driver.findElement(By.className("button")).click();
